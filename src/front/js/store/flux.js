@@ -48,10 +48,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 	  },
 	  actions: {
 		loadCharacters: async () => {
-		  const response = await fetch("https://swapi.dev/api/people");
+		  const response = await fetch("https://3001-jacra-starwarswbuilta-gnzikcoe7p5.ws-us30.gitpod.io/api/character");
 		  if (response.status === 200) {
 			const payload = await response.json();
-			const myNewCharacters = payload.results.map((people, i) => {
+			const myNewCharacters = payload.map((people, i) => {
 			  (people.detail = "/CharacterDetails/"), (people.favStatus = false);
 			  people.uid = i;
 			  return people;
@@ -61,10 +61,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		  }
 		},
 		loadPlanets: async () => {
-		  const response = await fetch("https://swapi.dev/api/planets");
+		  const response = await fetch("https://3001-jacra-starwarswbuilta-gnzikcoe7p5.ws-us30.gitpod.io/api/planet");
 		  if (response.status === 200) {
 			const payload = await response.json();
-			const myNewPlanets = payload.results.map((planets, i) => {
+			const myNewPlanets = payload.map((planets, i) => {
 			  (planets.detail = "/PlanetDetails/"), (planets.favStatus = false);
 			  planets.uid = i;
 			  return planets;
@@ -73,17 +73,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			console.log(myNewPlanets);
 		  }
 		},
-		// function keeps running (infinite loop?)
-		// loadMoreCharacters:async()=>{
-		//   let loadedCharacters=[]
-		//   for (let i=11; i<60; i++){
-		//   const response=await fetch(`https://swapi.dev/api/people/${i}`)
-		//   const payload= await response.json();
-		//   loadedCharacters.push(payload)
-		// }
-		// setStore({characters:characters.concat(loadedCharacters)})
-		// console.log(loadedCharacters)
-		// },
+
+		loadFavorites: async () => {
+			const response = await fetch("https://3001-jacra-starwarswbuilta-gnzikcoe7p5.ws-us30.gitpod.io/api/favorite");
+			if (response.status === 200) {
+			  const payload = await response.json();
+			  setStore({ favorites: payload });
+			}
+		},
+
 		checkFav: (favoriteCard) => {
 		  const { favorites } = getStore();
 		  if (favoriteCard.isFav === true) {

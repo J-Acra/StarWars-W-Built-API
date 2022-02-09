@@ -21,7 +21,7 @@ export const Navbar = (props) => {
         <Link to="/">
           <div className="homeIcon">
             <img
-              src="https://i.dlpng.com/static/png/5518266-star-wars-logo-png-download-1277640-free-transparent-admiral-star-wars-logo-transparent-900_340_preview.png"
+              src="https://w7.pngwing.com/pngs/614/790/png-transparent-anakin-skywalker-star-wars-day-computer-icons-star-wars-icon-text-logo-war.png"
               className="fillIcon mb-0 h1"
             ></img>
           </div>
@@ -45,19 +45,21 @@ export const Navbar = (props) => {
               {store.favorites.length === 0 ? (
                 <li>Empty!</li>
               ) : (
-                store.favorites.map((f, positionFav) => (
+                store.favorites.map((f, i) => {
+                  const fav = f.character ? f.character : f.planet;
+                  const type = f.character ? "character" : "planet";
                   <li className="dropdown-item">
-                    <Link className="noStyle" to={f.detail + f.uid}>
-                      {f.name}
+                    <Link className="noStyle" to={ type +"/" + fav.id}>
+                      {fav.name}
                     </Link>
                     <i
                       style={{ cursor: cursor }}
                       onMouseEnter={() => changeCursor}
-                      onClick={() => actions.remFav(positionFav)}
+                      onClick={() => actions.remFav(i)}
                       className="fas fa-trash mx-1"
                     ></i>
                   </li>
-                ))
+                  })
               )}
               {store.favorites.length !== 0 ? (
                 <li
