@@ -46,20 +46,21 @@ export const Navbar = (props) => {
                 <li>Empty!</li>
               ) : (
                 store.favorites.map((f, i) => {
-                  const fav = f.character ? f.character : f.planet;
+                  const fav = f.character === null ? f.planet : f.character;
                   const type = f.character ? "character" : "planet";
                   <li className="dropdown-item">
-                    <Link className="noStyle" to={ type +"/" + fav.id}>
+                    <Link className="noStyle" to={type + "/" + fav.id}>
                       {fav.name}
                     </Link>
+                    {console.log(fav.name)}
                     <i
                       style={{ cursor: cursor }}
                       onMouseEnter={() => changeCursor}
                       onClick={() => actions.remFav(i)}
                       className="fas fa-trash mx-1"
                     ></i>
-                  </li>
-                  })
+                  </li>;
+                })
               )}
               {store.favorites.length !== 0 ? (
                 <li

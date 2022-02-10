@@ -14,7 +14,6 @@ export const CharacterDetails = (props) => {
             <img
               className="fillDetail mb-3"
               src={
-                store.images["/CharacterDetails/" + params.theid] ||
                 "https://snr.unl.edu/images/portrait-large/staff/whiteblank.gif"
               }
             ></img>

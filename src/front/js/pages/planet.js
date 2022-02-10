@@ -14,7 +14,6 @@ export const PlanetDetails = (props) => {
             <img
               className="fillDetail mb-3"
               src={
-                store.images["/PlanetDetails/" + params.theid] ||
                 "https://snr.unl.edu/images/portrait-large/staff/whiteblank.gif"
               }
             ></img>

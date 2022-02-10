@@ -10,10 +10,7 @@ const PlanetCard = (props) => {
     <div className="card" style={{ width: "18rem" }}>
       <img
         className="card-img-top"
-        src={
-          store.images[props.detail + props.uid] ||
-          "https://www.pngrepo.com/png/245643/512/earth-globe-planet.png"
-        }
+        src={"https://www.pngrepo.com/png/245643/512/earth-globe-planet.png"}
       ></img>
       <ul className="card-body">
         <h5 className="card-title">{props.name}</h5>
