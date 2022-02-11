@@ -43,8 +43,10 @@ def get_favorite():
     all_serialized_favorite = list(map(lambda item:item.serialize(), favorite_query))
     return jsonify(all_serialized_favorite)
 
-@app.route("/token", methods=["POST"])
+@api.route("/token", methods=["POST"])
 def create_token():
+    if request.json is None:
+        return jsonify({"msg": "Body Empty!"}), 401
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     # Query your database for email and password
