@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 
-export const Login = (props) => {
+export const SignUp = (props) => {
   const history = useHistory();
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
@@ -11,13 +10,11 @@ export const Login = (props) => {
   return (
     <>
       <div class="text-center">
-        <h1>Logging In</h1>
+        <h1>Creating Account</h1>
       </div>
       <form
         onSubmit={(e) => {
-          actions
-            .createNewSession(email, password)
-            .then((session) => history.push("/"));
+          actions.createNewUser(email, password);
           e.preventDefault();
         }}
         className="container"
@@ -50,7 +47,7 @@ export const Login = (props) => {
             id="exampleInputPassword1"
           ></input>
         </div>
-        <button className="btn btn-primary">Login</button>
+        <button className="btn btn-primary">Signup</button>
       </form>
     </>
   );

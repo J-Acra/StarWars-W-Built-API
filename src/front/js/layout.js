@@ -8,6 +8,7 @@ import { CharacterDetails } from "./pages/character";
 import { PlanetDetails } from "./pages/planet";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login.js";
+import { SignUp } from "./pages/signUp.js";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -35,6 +36,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
             </Route>
             <Route>
               <h1>Not found!</h1>

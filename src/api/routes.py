@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Character, Planet, Favorite
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token,jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
 
@@ -20,7 +20,9 @@ def handle_hello():
 
 @api.route('/user', methods=['POST'])
 def create_user():
-    user = User(email="my_super1@email.com", password="blahblah", gender="male")
+    user = User(email=email, password=password, gender="male")
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
     db.session.add(user)
     db.session.commit()
     return jsonify(user.serialize())
@@ -38,7 +40,10 @@ def get_planet():
     return jsonify(all_serialized_planets)
 
 @api.route('/favorite', methods=['GET'])
+@jwt_required()
 def get_favorite():
+    current_user_id=get_jwt_identity()
+    user = User.filter.get(current_user_id)
     favorite_query = Favorite.query.all()
     all_serialized_favorite = list(map(lambda item:item.serialize(), favorite_query))
     return jsonify(all_serialized_favorite)

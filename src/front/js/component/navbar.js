@@ -36,9 +36,28 @@ export const Navbar = (props) => {
               Log Out
             </button>
           ) : (
-            <Link to="/login">
-              <button class="btn btn-primary btn-lg">Log me in!</button>
-            </Link>
+            <div class="dropdown">
+              <button
+                class="btn btn-primary btn-lg dropdown-toggle"
+                type="button"
+                id="dropdownMenu2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Login/Signup
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <Link class="noStyle" to="/login">
+                  <li class="text-center dropdown-item fw-bold">Login</li>
+                </Link>
+                <li class="dropdown-divider"></li>
+                <Link class="noStyle" to="/signup">
+                  <li class="text-center dropdown-item fw-bold">
+                    Create Account
+                  </li>
+                </Link>
+              </ul>
+            </div>
           )}
         </div>
         <div className="ml-auto">
