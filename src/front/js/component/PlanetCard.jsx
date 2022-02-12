@@ -8,10 +8,7 @@ const PlanetCard = (props) => {
 
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <img
-        className="card-img-top"
-        src={"https://www.pngrepo.com/png/245643/512/earth-globe-planet.png"}
-      ></img>
+      <img className="card-img-top" src={props.img_url}></img>
       <ul className="card-body">
         <h5 className="card-title">{props.name}</h5>
         <li className="list-group-item ">Population: {props.population}</li>

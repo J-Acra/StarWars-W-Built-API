@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 export const Navbar = (props) => {
   let [cursor, setCursor] = useState("pointer");
   const { store, actions } = useContext(Context);
+  const session = actions.getCurrentSession();
 
   const changeCursor = () => {
     setCursor((prevState) => {
@@ -26,6 +27,20 @@ export const Navbar = (props) => {
             ></img>
           </div>
         </Link>
+        <div class="loginButton ms-auto p-2">
+          {session ? (
+            <button
+              class="btn btn-danger btn-lg"
+              onClick={() => actions.clearSession()}
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link to="/login">
+              <button class="btn btn-primary btn-lg">Log me in!</button>
+            </Link>
+          )}
+        </div>
         <div className="ml-auto">
           <div class="dropdown">
             <button
@@ -76,13 +91,13 @@ export const Navbar = (props) => {
           </div>
         </div>
       </nav>
-      <div className="inputDiv mb-3">
+      {/* <div className="inputDiv mb-3">
         <input
           className="form-control"
           type="text"
           placeholder="Search the Galaxy"
         ></input>
-      </div>
+      </div> */}
     </>
   );
 };

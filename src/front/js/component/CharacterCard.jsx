@@ -8,10 +8,7 @@ const CharacterCard = (props) => {
 
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <img
-        className="card-img-top"
-        src={"https://snr.unl.edu/images/portrait-large/staff/whiteblank.gif"}
-      ></img>
+      <img className="card-img-top" src={props.img_url}></img>
       <ul className="card-body">
         <h5 className="card-title">{props.name}</h5>
         <li className="list-group-item ">Gender: {props.gender}</li>
@@ -25,7 +22,7 @@ const CharacterCard = (props) => {
           </button>
         </Link>
         <button
-          onClick={() => actions.checkFav(props.data)}
+          onClick={() => actions.addFav(props.data)}
           type="button"
           className="ms-auto btn btn-warning"
         >

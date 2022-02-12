@@ -21,9 +21,9 @@ const Home = (props) => {
               hair_color={store.characters[id].hair_color}
               eye_color={store.characters[id].eye_color}
               detail={store.characters[id].detail}
-              favStatus={store.characters[id].isFav}
               uid={store.characters[id].uid}
               data={c}
+              img_url={store.characters[id].img_url}
             />{" "}
           </div>
         ))}
@@ -38,8 +38,8 @@ const Home = (props) => {
               population={store.planets[id].population}
               terrain={store.planets[id].terrain}
               detail={store.planets[id].detail}
-              favStatus={store.planets[id].isFav}
               uid={store.planets[id].uid}
+              img_url={store.planets[id].img_url}
               data={c}
             />{" "}
           </div>

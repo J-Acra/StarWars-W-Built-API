@@ -14,7 +14,8 @@ export const PlanetDetails = (props) => {
             <img
               className="fillDetail mb-3"
               src={
-                "https://snr.unl.edu/images/portrait-large/staff/whiteblank.gif"
+                store.planets[params.theid].img_url ||
+                "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
               }
             ></img>
           </div>
@@ -23,7 +24,8 @@ export const PlanetDetails = (props) => {
               {store.planets[params.theid]?.name}
             </h1>
             <p className="text-center mx-4 p-5">
-              {store.planets[params.theid]?.description||"This is a generic description if information could not be fetched"}
+              {store.planets[params.theid]?.description ||
+                "This is a generic description if information could not be fetched"}
             </p>
           </div>
           <div className="bottomInfo row border-top border-danger p-3">

@@ -7,6 +7,7 @@ import Home from "./pages/Home.jsx";
 import { CharacterDetails } from "./pages/character";
 import { PlanetDetails } from "./pages/planet";
 import injectContext from "./store/appContext";
+import { Login } from "./pages/login.js";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -31,6 +32,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/planet/:theid">
               <PlanetDetails />
+            </Route>
+            <Route exact path="/login">
+              <Login />
             </Route>
             <Route>
               <h1>Not found!</h1>
