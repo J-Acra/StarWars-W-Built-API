@@ -39,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.status === 200) {
           const payload = await response.json();
           setStore({ favorites: payload });
-          console.log(payload);
+          console.log("this is incoming favorites" + payload);
         }
       },
 
@@ -82,6 +82,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         setStore({ favorites: clearedFavorites });
         setStore({ favorites: [] });
+      },
+      createNewUser: async (email, password, gender) => {
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            gender: gender,
+          }),
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/user`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          console.log("Account Creation Succesful!");
+          return payload; //this is gonna make the promise resolve
+        }
       },
       createNewSession: async (email, password) => {
         const options = {

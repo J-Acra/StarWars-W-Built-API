@@ -7,6 +7,7 @@ export const SignUp = (props) => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
   return (
     <>
       <div class="text-center">
@@ -14,7 +15,7 @@ export const SignUp = (props) => {
       </div>
       <form
         onSubmit={(e) => {
-          actions.createNewUser(email, password);
+          actions.createNewUser(email, password, gender);
           e.preventDefault();
         }}
         className="container"
@@ -43,6 +44,18 @@ export const SignUp = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+          ></input>
+        </div>
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">
+            Gender
+          </label>
+          <input
+            onChange={(e) => setGender(e.target.value)}
+            value={gender}
+            type="gender"
             className="form-control"
             id="exampleInputPassword1"
           ></input>

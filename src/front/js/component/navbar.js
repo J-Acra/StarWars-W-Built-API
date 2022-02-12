@@ -76,8 +76,14 @@ export const Navbar = (props) => {
               </span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              {store.favorites.length === 0 ? (
-                <li>Empty!</li>
+              {!session ? (
+                <Link class="noStyle" to="/login">
+                  <li class="text-center dropdown-item fw-bold">
+                    Login to view!
+                  </li>
+                </Link>
+              ) : store.favorites.length === 0 ? (
+                <li class="text-center">No Favorites!</li>
               ) : (
                 store.favorites.map((f, i) => {
                   const fav = f.character === null ? f.planet : f.character;

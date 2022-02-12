@@ -20,9 +20,10 @@ def handle_hello():
 
 @api.route('/user', methods=['POST'])
 def create_user():
-    user = User(email=email, password=password, gender="male")
+    user = User(email=email, password=password, gender=gender)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    gender = request.json.get("gender", None)
     db.session.add(user)
     db.session.commit()
     return jsonify(user.serialize())
