@@ -13,10 +13,7 @@ export const PlanetDetails = (props) => {
           <div className="detailImage col">
             <img
               className="fillDetail mb-3"
-              src={
-                store.planets[params.theid].img_url ||
-                "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640"
-              }
+              src={store.planets[params.theid]?.img_url}
             ></img>
           </div>
           <div className="detailText col">

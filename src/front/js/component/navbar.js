@@ -63,18 +63,21 @@ export const Navbar = (props) => {
                 store.favorites.map((f, i) => {
                   const fav = f.character === null ? f.planet : f.character;
                   const type = f.character ? "character" : "planet";
-                  <li className="dropdown-item">
-                    <Link className="noStyle" to={type + "/" + fav.id}>
-                      {fav.name}
-                    </Link>
-                    {console.log(fav.name)}
-                    <i
-                      style={{ cursor: cursor }}
-                      onMouseEnter={() => changeCursor}
-                      onClick={() => actions.remFav(i)}
-                      className="fas fa-trash mx-1"
-                    ></i>
-                  </li>;
+                  return (
+                    <li className="dropdown-item">
+                      <Link className="noStyle" to={type + "/" + fav.id}>
+                        {fav.name}
+                      </Link>
+                      {console.log("this is fav name: " + fav.name)}
+                      {console.log("this is type: " + type)}
+                      <i
+                        style={{ cursor: cursor }}
+                        onMouseEnter={() => changeCursor}
+                        onClick={() => actions.remFav(i)}
+                        className="fas fa-trash mx-1"
+                      ></i>
+                    </li>
+                  );
                 })
               )}
               {store.favorites.length !== 0 ? (
@@ -91,13 +94,6 @@ export const Navbar = (props) => {
           </div>
         </div>
       </nav>
-      {/* <div className="inputDiv mb-3">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Search the Galaxy"
-        ></input>
-      </div> */}
     </>
   );
 };
