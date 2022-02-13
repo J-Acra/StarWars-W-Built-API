@@ -67,7 +67,7 @@ export const Navbar = (props) => {
               type="button"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
-              data-bs-auto-close="false"
+              data-bs-auto-close="true"
               aria-expanded="false"
             >
               Favorites

@@ -50,7 +50,12 @@ export const Login = (props) => {
             id="exampleInputPassword1"
           ></input>
         </div>
-        <button className="btn btn-primary">Login</button>
+        <div class="d-flex">
+          <button className="btn btn-primary">Login</button>
+          <Link class="noStyle ms-auto" to="/signup">
+            <div className="btn btn-primary ms-auto">Create Account</div>
+          </Link>
+        </div>
       </form>
     </>
   );

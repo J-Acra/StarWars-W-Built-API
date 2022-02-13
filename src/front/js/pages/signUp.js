@@ -16,6 +16,9 @@ export const SignUp = (props) => {
       <form
         onSubmit={(e) => {
           actions.createNewUser(email, password, gender);
+          actions
+            .createNewSession(email, password)
+            .then((session) => history.push("/"));
           e.preventDefault();
         }}
         className="container"

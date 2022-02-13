@@ -18,7 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             return people;
           });
           setStore({ characters: myNewCharacters });
-          console.log(payload);
         }
       },
       loadPlanets: async () => {
@@ -35,11 +34,24 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadFavorites: async () => {
-        const response = await fetch(process.env.BACKEND_URL + `/api/favorite`);
+        const token = JSON.parse(localStorage.getItem("session"));
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/favorite`,
+          options
+        );
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        };
         if (response.status === 200) {
           const payload = await response.json();
           setStore({ favorites: payload });
           console.log("this is incoming favorites" + payload);
+        } else {
+          console.log("Authorization failed!");
         }
       },
 
