@@ -34,18 +34,18 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadFavorites: async () => {
-        const token = JSON.parse(localStorage.getItem("session"));
-        const response = await fetch(
-          process.env.BACKEND_URL + `/api/favorite`,
-          options
-        );
+        const session = JSON.parse(localStorage.getItem("session"));
         const options = {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
+            Authorization: "Bearer " + session.token,
           },
         };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/favorite`,
+          options
+        );
         if (response.status === 200) {
           const payload = await response.json();
           setStore({ favorites: payload });

@@ -44,8 +44,8 @@ def get_planet():
 @jwt_required()
 def get_favorite():
     current_user_id=get_jwt_identity()
-    user = User.filter.get(current_user_id)
-    favorite_query = Favorite.query.all()
+    user = User.query.get(current_user_id)
+    favorite_query = Favorite.query.filter_by(user_id=user.id)
     all_serialized_favorite = list(map(lambda item:item.serialize(), favorite_query))
     return jsonify(all_serialized_favorite)
 
