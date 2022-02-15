@@ -22,7 +22,7 @@ const CharacterCard = (props) => {
           </button>
         </Link>
         <button
-          onClick={() => actions.addFav(props.data)}
+          onClick={() => actions.addFavCharacter(props.data)}
           type="button"
           className="ms-auto btn btn-warning"
         >

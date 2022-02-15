@@ -8,16 +8,6 @@ from flask_jwt_extended import create_access_token,jwt_required, get_jwt_identit
 
 api = Blueprint('api', __name__)
 
-
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
-
 @api.route('/user', methods=['POST'])
 def create_user():
     email = request.json.get("email", None)
@@ -39,6 +29,45 @@ def get_planet():
     planet_query = Planet.query.all()
     all_serialized_planets = list(map(lambda item:item.serialize(), planet_query))
     return jsonify(all_serialized_planets)
+
+@api.route('/planet', methods=['POST'])
+def create_planet():
+    name = request.json.get('name', None)
+    climate = request.json.get('climate', None)
+    rotation_period = request.json.get('rotation_period', None)
+    orbital_period = request.json.get('orbital_period', None)
+    diameter = request.json.get('diameter', None)
+    terrain = request.json.get('terrain', None)
+    population = request.json.get('population', None)
+    img_url = request.json.get('img_url', None)
+    
+    planet = Planet(name=name,
+                    climate=climate,
+                    rotation_period=rotation_period,
+                    orbital_period=orbital_period,
+                    diameter=diameter,
+                    terrain=terrain,
+                    population=population, 
+                    img_url=img_url)
+    db.session.add(planet)
+    db.session.commit()
+    return jsonify(planet.serialize())
+
+@api.route('/favorite', methods=['POST'])
+@jwt_required()
+def add_favorite():
+    current_user_id=get_jwt_identity()
+    user = User.query.get(current_user_id)
+    user_id = request.json.get('user', None)
+    planets_id = request.json.get('planet', None)
+    character_id = request.json.get('character', None)
+    favorite = Favorite(
+        user_id=user_id,
+        planets_id=planets_id,
+        character_id=character_id)
+    db.session.add(favorite)
+    db.session.commit()
+    return jsonify(favorite.serialize())
 
 @api.route('/favorite', methods=['GET'])
 @jwt_required()

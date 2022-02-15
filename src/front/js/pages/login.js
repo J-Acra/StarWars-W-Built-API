@@ -18,6 +18,7 @@ export const Login = (props) => {
           actions
             .createNewSession(email, password)
             .then((session) => history.push("/"));
+
           e.preventDefault();
         }}
         className="container"

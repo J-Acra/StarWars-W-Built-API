@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import Home from "./pages/Home.jsx";
 
 import { CharacterDetails } from "./pages/character";
+import { CreatePlanet } from "./pages/createPlanet";
 import { PlanetDetails } from "./pages/planet";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login.js";
@@ -30,6 +31,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/character/:theid">
               <CharacterDetails />
+            </Route>
+            <Route exact path="/planet/new">
+              <CreatePlanet />
             </Route>
             <Route exact path="/planet/:theid">
               <PlanetDetails />

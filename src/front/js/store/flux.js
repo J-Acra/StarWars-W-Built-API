@@ -49,26 +49,92 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.status === 200) {
           const payload = await response.json();
           setStore({ favorites: payload });
-          console.log("this is incoming favorites" + payload);
         } else {
           console.log("Authorization failed!");
         }
       },
-
-      addFav: (favoriteCard) => {
-        const { favorites } = getStore();
-        if (favoriteCard.isFav === true) {
-          favoriteCard.isFav = false;
-          setStore({
-            favorites: favorites.filter(
-              (favoriteItem) =>
-                favoriteItem.uid + favoriteItem.name !==
-                favoriteCard.uid + favoriteCard.name
-            ),
-          });
-        } else {
-          favoriteCard.isFav = true;
-          setStore({ favorites: favorites.concat(favoriteCard) });
+      addPlanet: async (
+        name,
+        climate,
+        rotation_period,
+        orbital_period,
+        diameter,
+        terrain,
+        population,
+        img_url
+      ) => {
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            climate: climate,
+            rotation_period: rotation_period,
+            orbital_period: orbital_period,
+            diameter: diameter,
+            terrain: terrain,
+            population: population,
+            img_url: img_url,
+          }),
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/planet`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          console.log("planet created successfully!");
+          return payload;
+        }
+      },
+      addFavPlanet: async (favorite) => {
+        const actions = getActions();
+        const session = actions.getCurrentSession();
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + session.token,
+          },
+          body: JSON.stringify({
+            user: session.user_id,
+            planet: favorite.id,
+            character: null,
+          }),
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/favorite`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          console.log("planet favorited successfully!");
+          return payload;
+        }
+      },
+      addFavCharacter: async (favorite) => {
+        const actions = getActions();
+        const session = actions.getCurrentSession();
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + session.token,
+          },
+          body: JSON.stringify({
+            user: session.user_id,
+            planet: null,
+            character: favorite.id,
+          }),
+        };
+        const response = await fetch(
+          process.env.BACKEND_URL + `/api/favorite`,
+          options
+        );
+        if (response.status === 200) {
+          const payload = await response.json();
+          console.log("character favorited successfully!");
+          return payload;
         }
       },
       remFav: (position) => {
