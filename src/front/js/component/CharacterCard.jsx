@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 
 const CharacterCard = (props) => {
   const { store, actions } = useContext(Context);
+  const [favStatus, setFavStatus] = useState();
 
   return (
     <div className="card" style={{ width: "18rem" }}>
@@ -23,12 +24,18 @@ const CharacterCard = (props) => {
         </Link>
         <button
           onClick={() => {
-            actions.addFavCharacter(props.data).then(actions.loadFavorites());
+            actions
+              .addFavCharacter(props.data)
+              .then(
+                actions.loadFavorites(),
+                actions.loadFavorites(),
+                setFavStatus(true)
+              );
           }}
           type="button"
           className="ms-auto btn btn-warning"
         >
-          {props.favStatus === true ? (
+          {favStatus === true ? (
             <i className="fas fa-heart"></i>
           ) : (
             <i className="far fa-heart"></i>

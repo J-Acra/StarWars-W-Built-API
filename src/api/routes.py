@@ -61,13 +61,17 @@ def add_favorite():
     user_id = request.json.get('user', None)
     planets_id = request.json.get('planet', None)
     character_id = request.json.get('character', None)
+    duplicate = Favorite.query.filter_by(user_id=user_id,planets_id=planets_id,character_id=character_id).first()
     favorite = Favorite(
         user_id=user_id,
         planets_id=planets_id,
         character_id=character_id)
-    db.session.add(favorite)
-    db.session.commit()
-    return jsonify(favorite.serialize())
+    if duplicate is None:
+        db.session.add(favorite)
+        db.session.commit()
+        return jsonify(favorite.serialize())
+    
+    return jsonify({"msg":"Duplicated Detected"}), 400
 
 @api.route('/favorite', methods=['GET'])
 @jwt_required()

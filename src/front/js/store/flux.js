@@ -34,6 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loadFavorites: async () => {
+        const store = getStore();
         const session = JSON.parse(localStorage.getItem("session"));
         const options = {
           method: "GET",
@@ -49,6 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.status === 200) {
           const payload = await response.json();
           setStore({ favorites: payload });
+          console.log(store.favorites);
         } else {
           console.log("Authorization failed!");
         }
