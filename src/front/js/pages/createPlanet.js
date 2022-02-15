@@ -21,7 +21,9 @@ export const CreatePlanet = (props) => {
             formData.population,
             formData.img_url
           )
-          .then(() => history.push("/"));
+          .then(() => {
+            actions.loadPlanets(), history.push("/");
+          });
         e.preventDefault();
       }}
       className="container"
@@ -149,7 +151,7 @@ export const CreatePlanet = (props) => {
         ></input>
       </div>
 
-      <button className="btn btn-primary">Login</button>
+      <button className="btn btn-primary">Create Planet</button>
     </form>
   );
 };

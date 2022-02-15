@@ -15,10 +15,9 @@ export const Login = (props) => {
       </div>
       <form
         onSubmit={(e) => {
-          actions
-            .createNewSession(email, password)
-            .then((session) => history.push("/"));
-
+          actions.createNewSession(email, password).then((session) => {
+            actions.loadFavorites(), history.push("/");
+          });
           e.preventDefault();
         }}
         className="container"

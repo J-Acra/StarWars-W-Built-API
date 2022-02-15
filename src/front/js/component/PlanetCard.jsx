@@ -21,7 +21,9 @@ const PlanetCard = (props) => {
           </button>
         </Link>
         <button
-          onClick={() => actions.addFavPlanet(props.data)}
+          onClick={() => {
+            actions.addFavPlanet(props.data).then(actions.loadFavorites());
+          }}
           type="button"
           className="ms-auto btn btn-warning"
         >

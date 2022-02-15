@@ -31,7 +31,10 @@ export const Navbar = (props) => {
           {session ? (
             <button
               class="btn btn-danger btn-lg"
-              onClick={() => actions.clearSession()}
+              onClick={() => {
+                actions.clearSession();
+                store.favorites = [];
+              }}
             >
               Log Out
             </button>
@@ -90,11 +93,9 @@ export const Navbar = (props) => {
                   const type = f.character ? "character" : "planet";
                   return (
                     <li className="dropdown-item">
-                      <Link className="noStyle" to={type + "/" + fav.id}>
+                      <Link className="noStyle" to={type + "/" + (fav.id - 1)}>
                         {fav.name}
                       </Link>
-                      {console.log("this is fav name: " + fav.name)}
-                      {console.log("this is type: " + type)}
                       <i
                         style={{ cursor: cursor }}
                         onMouseEnter={() => changeCursor}

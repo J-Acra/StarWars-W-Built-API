@@ -57,9 +57,9 @@ export const CharacterDetails = (props) => {
               </div>
             </div>
             <div className="col">
-              <div className="text-danger text-center">Skin Color</div>
+              <div className="text-danger text-center">Eye Color</div>
               <div className="mt-3 text-center">
-                {store.characters[params.theid]?.skin_color}
+                {store.characters[params.theid]?.eye_color}
               </div>
             </div>
           </div>
